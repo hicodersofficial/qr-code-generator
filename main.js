@@ -37,7 +37,7 @@ function handleQRText(e) {
   generateQRCode();
 }
 
-function generateQRCode() {
+async function generateQRCode() {
   qrContainer.innerHTML = "";
   new QRCode("qr-code", {
     text,
@@ -46,26 +46,13 @@ function generateQRCode() {
     colorLight,
     colorDark,
   });
-  makeDownloadBtn();
-}
-
-function makeDownloadBtn() {
-  setTimeout(() => {
-    const img = document.querySelector("#qr-code img");
-    if (img.currentSrc) {
-      download.href = img.currentSrc;
-      return;
-    }
-    const canvas = document.querySelector("canvas");
-    download.href = canvas.toDataURL();
-  }, 50);
+  download.href = await resolveDataUrl();
 }
 
 async function handleShare() {
   setTimeout(async () => {
     try {
-      const img = document.querySelector("#qr-code img");
-      const base64url = img.currentSrc;
+      const base64url = await resolveDataUrl();
       const blob = await (await fetch(base64url)).blob();
       const file = new File([blob], "QRCode.png", {
         type: blob.type,
@@ -83,5 +70,19 @@ async function handleShare() {
 function handleSize(e) {
   size = e.target.value;
   generateQRCode();
+}
+
+function resolveDataUrl() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const img = document.querySelector("#qr-code img");
+      if (img.currentSrc) {
+        resolve(img.currentSrc);
+        return;
+      }
+      const canvas = document.querySelector("canvas");
+      resolve(canvas.toDataURL());
+    }, 50);
+  });
 }
 generateQRCode();
