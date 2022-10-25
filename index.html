@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>QR Code generator</title>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+    ></script>
+  </head>
+  <body>
+    <section>
+      <div class="row">
+        <input type="color" class="light" value="#ffffff" />
+        <input type="color" class="dark" />
+        <select class="sizes">
+          <option value="100">100x100</option>
+          <option value="200">200x200</option>
+          <option value="300">300x300</option>
+          <option selected value="400">400x400</option>
+          <option value="500">500x500</option>
+          <option value="600">600x600</option>
+          <option value="700">700x700</option>
+          <option value="800">800x800</option>
+          <option value="900">900x900</option>
+          <option value="1000">1000x1000</option>
+        </select>
+      </div>
+      <input type="text" placeholder="Enter QR text" class="qr-text" />
+
+      <div id="qr-code"></div>
+      <div class="action-container">
+        <a href="#" download="QRCode" class="download btn">
+          <span>Download</span>
+          <img src="./assets/icons/download.svg" alt="" />
+        </a>
+        <button class="btn share-btn">
+          <span>Share</span>
+          <img src="./assets/icons/share.svg" alt="" />
+        </button>
+      </div>
+    </section>
+    <script defer src="main.js"></script>
+  </body>
+</html>
