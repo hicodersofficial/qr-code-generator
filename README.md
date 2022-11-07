@@ -7,3 +7,4 @@ Create, download and share QR Code!
 # Screenshot
 
 ![](assets/preview.png)
+![](assets/preview.png)
